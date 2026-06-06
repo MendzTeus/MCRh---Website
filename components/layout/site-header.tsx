@@ -4,11 +4,11 @@ import { mainNav, siteConfig } from "@/content/site";
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-stone-200 bg-white">
+    <header className="sticky top-0 z-40 border-b border-outline-soft/70 bg-background/85 backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-6 py-4">
         <Link
           href="/"
-          className="text-xl font-semibold tracking-[0.18em] text-stone-950 uppercase"
+          className="font-serif text-2xl font-normal tracking-normal text-midnight"
         >
           {siteConfig.name}
         </Link>
@@ -20,7 +20,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-stone-600 transition-colors hover:text-stone-950"
+              className="text-xs font-semibold tracking-[0.15em] text-charcoal uppercase transition-colors hover:text-midnight"
             >
               {item.label}
             </Link>
@@ -28,7 +28,7 @@ export function SiteHeader() {
         </nav>
         <Link
           href="/contacto"
-          className="inline-flex h-10 items-center justify-center rounded border border-stone-950 px-4 text-sm font-semibold text-stone-950 transition-colors hover:bg-stone-950 hover:text-white"
+          className="inline-flex min-h-10 items-center justify-center rounded border border-brass px-4 py-2 text-xs font-semibold tracking-[0.15em] text-midnight uppercase transition-colors hover:bg-brass"
         >
           Enquire
         </Link>

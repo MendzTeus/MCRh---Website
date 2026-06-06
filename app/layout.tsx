@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Hanken_Grotesk, Playfair_Display } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/content/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,9 +35,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${hanken.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-stone-50 text-stone-950">
+      <body className="flex min-h-full flex-col bg-background text-foreground">
         <Providers>
           <SiteHeader />
           <main className="flex-1">{children}</main>

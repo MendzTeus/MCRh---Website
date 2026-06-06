@@ -1,25 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafaf9;
-  --foreground: #1c1917;
+  --background: #fdf9f3;
+  --foreground: #1c1c18;
+  --surface: #fdf9f3;
+  --surface-container-low: #f7f3ed;
+  --surface-container: #f1ede7;
+  --surface-container-high: #ebe8e2;
+  --surface-variant: #e6e2dc;
+  --midnight: #0e1a2b;
+  --midnight-muted: #3c475a;
+  --brass: #c8a45c;
+  --brass-deep: #775a19;
+  --outline-soft: #c5c6cd;
+  --charcoal: #44474c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-variant: var(--surface-variant);
+  --color-midnight: var(--midnight);
+  --color-midnight-muted: var(--midnight-muted);
+  --color-brass: var(--brass);
+  --color-brass-deep: var(--brass-deep);
+  --color-outline-soft: var(--outline-soft);
+  --color-charcoal: var(--charcoal);
+  --font-sans: var(--font-hanken);
+  --font-serif: var(--font-playfair);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-hanken), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brass) 35%, transparent);
+  color: var(--midnight);
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #a16207;
+  outline: 2px solid var(--brass);
   outline-offset: 3px;
 }
