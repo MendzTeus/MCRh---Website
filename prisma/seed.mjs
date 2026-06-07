@@ -167,6 +167,47 @@ const properties = [
   },
 ];
 
+const mediaPaths = {
+  chambers: [
+    "/media/properties/chambers/01.jpeg",
+    "/media/properties/chambers/02.jpeg",
+    "/media/properties/chambers/03.jpeg",
+    "/media/properties/chambers/04.jpeg",
+    "/media/properties/chambers/05.jpeg",
+  ],
+  "john-dalton-st": [
+    "/media/properties/john-dalton-st/01.jpg",
+    "/media/properties/john-dalton-st/02.jpg",
+    "/media/properties/john-dalton-st/03.jpg",
+    "/media/properties/john-dalton-st/04.jpg",
+    "/media/properties/john-dalton-st/05.jpg",
+  ],
+  "wood-street": [
+    "/media/properties/wood-street/01.jpeg",
+    "/media/properties/wood-street/02.jpg",
+    "/media/properties/wood-street/03.jpg",
+  ],
+  "the-collective": [
+    "/media/properties/the-collective/01.jpeg",
+    "/media/properties/the-collective/02.jpeg",
+    "/media/properties/the-collective/03.jpeg",
+    "/media/properties/the-collective/04.jpeg",
+    "/media/properties/the-collective/05.jpeg",
+  ],
+  ancoats: [
+    "/media/properties/ancoats/01.jpeg",
+    "/media/properties/ancoats/02.jpeg",
+    "/media/properties/ancoats/03.jpeg",
+    "/media/properties/ancoats/04.jpeg",
+    "/media/properties/ancoats/05.jpeg",
+  ],
+  "old-trafford": [
+    "/media/properties/old-trafford/01.jpeg",
+    "/media/properties/old-trafford/02.jpeg",
+    "/media/properties/old-trafford/03.jpeg",
+  ],
+};
+
 for (const property of properties) {
   const saved = await prisma.property.upsert({
     where: { slug: property.slug },
@@ -183,19 +224,22 @@ for (const property of properties) {
   await prisma.mediaAsset.deleteMany({
     where: {
       propertyId: saved.id,
-      path: "/images/mcrh-hero-reference.png",
     },
   });
 
-  await prisma.mediaAsset.create({
-    data: {
-      propertyId: saved.id,
-      type: "IMAGE",
-      path: "/images/mcrh-hero-reference.png",
-      alt: `${saved.name} interior reference image`,
-      order: 0,
-    },
-  });
+  const paths = mediaPaths[property.slug] ?? [];
+
+  if (paths.length > 0) {
+    await prisma.mediaAsset.createMany({
+      data: paths.map((path, index) => ({
+        propertyId: saved.id,
+        type: "IMAGE",
+        path,
+        alt: `${saved.name} property photo ${index + 1}`,
+        order: index,
+      })),
+    });
+  }
 }
 
 const count = await prisma.property.count();

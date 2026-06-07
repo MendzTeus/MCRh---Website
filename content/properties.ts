@@ -4,6 +4,11 @@ export type PropertyUnit = {
   description: string;
 };
 
+export type PropertyImage = {
+  src: string;
+  alt: string;
+};
+
 export type Property = {
   slug: string;
   name: string;
@@ -16,13 +21,60 @@ export type Property = {
   bathrooms: number;
   imageSrc: string;
   imageAlt: string;
+  gallery: PropertyImage[];
   airbnbUrl?: string | null;
   amenities: string[];
   units: PropertyUnit[];
   displayOrder: number;
 };
 
-const imageSrc = "/images/mcrh-hero-reference.png";
+const mediaPaths = {
+  chambers: [
+    "/media/properties/chambers/01.jpeg",
+    "/media/properties/chambers/02.jpeg",
+    "/media/properties/chambers/03.jpeg",
+    "/media/properties/chambers/04.jpeg",
+    "/media/properties/chambers/05.jpeg",
+  ],
+  johnDaltonSt: [
+    "/media/properties/john-dalton-st/01.jpg",
+    "/media/properties/john-dalton-st/02.jpg",
+    "/media/properties/john-dalton-st/03.jpg",
+    "/media/properties/john-dalton-st/04.jpg",
+    "/media/properties/john-dalton-st/05.jpg",
+  ],
+  woodStreet: [
+    "/media/properties/wood-street/01.jpeg",
+    "/media/properties/wood-street/02.jpg",
+    "/media/properties/wood-street/03.jpg",
+  ],
+  theCollective: [
+    "/media/properties/the-collective/01.jpeg",
+    "/media/properties/the-collective/02.jpeg",
+    "/media/properties/the-collective/03.jpeg",
+    "/media/properties/the-collective/04.jpeg",
+    "/media/properties/the-collective/05.jpeg",
+  ],
+  ancoats: [
+    "/media/properties/ancoats/01.jpeg",
+    "/media/properties/ancoats/02.jpeg",
+    "/media/properties/ancoats/03.jpeg",
+    "/media/properties/ancoats/04.jpeg",
+    "/media/properties/ancoats/05.jpeg",
+  ],
+  oldTrafford: [
+    "/media/properties/old-trafford/01.jpeg",
+    "/media/properties/old-trafford/02.jpeg",
+    "/media/properties/old-trafford/03.jpeg",
+  ],
+} as const;
+
+function galleryFor(name: string, paths: readonly string[]): PropertyImage[] {
+  return paths.map((src, index) => ({
+    src,
+    alt: `${name} property photo ${index + 1}`,
+  }));
+}
 
 export const properties: Property[] = [
   {
@@ -36,8 +88,9 @@ export const properties: Property[] = [
     bedrooms: 3,
     beds: 3,
     bathrooms: 2,
-    imageSrc,
-    imageAlt: "Luxury apartment interior reference for Chapel Walks Chambers",
+    imageSrc: mediaPaths.chambers[0],
+    imageAlt: "Chapel Walks Chambers styled bedroom",
+    gallery: galleryFor("Chapel Walks Chambers", mediaPaths.chambers),
     amenities: [
       "Central Manchester",
       "Fully equipped kitchen",
@@ -80,8 +133,9 @@ export const properties: Property[] = [
     bedrooms: 4,
     beds: 4,
     bathrooms: 3,
-    imageSrc,
-    imageAlt: "Luxury apartment interior reference for John Dalton Street",
+    imageSrc: mediaPaths.johnDaltonSt[0],
+    imageAlt: "John Dalton Street styled bedroom",
+    gallery: galleryFor("John Dalton Street", mediaPaths.johnDaltonSt),
     amenities: [
       "Prime location",
       "Fully equipped kitchen",
@@ -136,8 +190,9 @@ export const properties: Property[] = [
     bedrooms: 2,
     beds: 2,
     bathrooms: 2,
-    imageSrc,
-    imageAlt: "Luxury apartment interior reference for Wood Street",
+    imageSrc: mediaPaths.woodStreet[0],
+    imageAlt: "Wood Street apartment bedroom",
+    gallery: galleryFor("Wood Street", mediaPaths.woodStreet),
     amenities: [
       "Two bedrooms",
       "Two bathrooms",
@@ -168,8 +223,9 @@ export const properties: Property[] = [
     bedrooms: 1,
     beds: 1,
     bathrooms: 1,
-    imageSrc,
-    imageAlt: "Luxury apartment interior reference for The Collective",
+    imageSrc: mediaPaths.theCollective[0],
+    imageAlt: "The Collective apartment bedroom",
+    gallery: galleryFor("The Collective", mediaPaths.theCollective),
     amenities: [
       "Wi-Fi",
       "Private bathroom",
@@ -205,8 +261,9 @@ export const properties: Property[] = [
     bedrooms: 2,
     beds: 2,
     bathrooms: 2,
-    imageSrc,
-    imageAlt: "Luxury apartment interior reference for Ancoats",
+    imageSrc: mediaPaths.ancoats[0],
+    imageAlt: "Ancoats apartment living space",
+    gallery: galleryFor("Ancoats", mediaPaths.ancoats),
     amenities: [
       "Ancoats location",
       "Near Co-op Live",
@@ -255,8 +312,9 @@ export const properties: Property[] = [
     bedrooms: 2,
     beds: 2,
     bathrooms: 2,
-    imageSrc,
-    imageAlt: "Luxury apartment interior reference for Old Trafford",
+    imageSrc: mediaPaths.oldTrafford[0],
+    imageAlt: "Old Trafford apartment living space",
+    gallery: galleryFor("Old Trafford", mediaPaths.oldTrafford),
     amenities: [
       "Free parking",
       "Two bedrooms",

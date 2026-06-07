@@ -42,6 +42,8 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     notFound();
   }
 
+  const [primaryGalleryImage, ...secondaryGalleryImages] = property.gallery;
+
   return (
     <>
       <section className="relative min-h-[720px] overflow-hidden bg-midnight text-white">
@@ -154,6 +156,49 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
               </Card>
             ))}
           </div>
+        </div>
+      </Section>
+
+      <Section className="bg-surface-container-low">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            eyebrow="Gallery"
+            title="A closer look at the space."
+            body="Current property photography pulled into the new media pipeline, ready for the future admin uploader."
+          />
+          <ButtonLink
+            href={`/contacto?property=${property.slug}`}
+            variant="ghost"
+          >
+            Enquire about this stay
+          </ButtonLink>
+        </div>
+        <div className="mt-10 grid gap-4 lg:grid-cols-4">
+          {primaryGalleryImage ? (
+            <div className="relative aspect-[16/11] overflow-hidden rounded-lg lg:col-span-2 lg:row-span-2 lg:aspect-auto">
+              <Image
+                src={primaryGalleryImage.src}
+                alt={primaryGalleryImage.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          ) : null}
+          {secondaryGalleryImages.slice(0, 4).map((image) => (
+            <div
+              key={image.src}
+              className="relative aspect-[4/3] overflow-hidden rounded-lg"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </Section>
 
