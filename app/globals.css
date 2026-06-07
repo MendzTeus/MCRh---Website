@@ -1,43 +1,167 @@
 @import "tailwindcss";
 
 :root {
+  /* Base palette */
   --background: #fdf9f3;
   --foreground: #1c1c18;
   --surface: #fdf9f3;
+  --surface-bright: #fdf9f3;
+  --surface-dim: #ddd9d4;
   --surface-container-lowest: #ffffff;
   --surface-container-low: #f7f3ed;
   --surface-container: #f1ede7;
   --surface-container-high: #ebe8e2;
+  --surface-container-highest: #e6e2dc;
   --surface-variant: #e6e2dc;
+  --surface-tint: #535f73;
+  /* Primary (black in Stitch) */
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --primary-container: #101c2d;
+  --on-primary-container: #79849a;
+  --primary-fixed: #d7e3fb;
+  --primary-fixed-dim: #bbc7de;
+  --inverse-primary: #bbc7de;
+  --on-primary-fixed: #101c2d;
+  --on-primary-fixed-variant: #3c475a;
+  /* Secondary (brass/gold) */
+  --secondary: #775a19;
+  --on-secondary: #ffffff;
+  --secondary-container: #fdd588;
+  --on-secondary-container: #775b1a;
+  --secondary-fixed: #ffdea2;
+  --secondary-fixed-dim: #e8c176;
+  --on-secondary-fixed: #261900;
+  --on-secondary-fixed-variant: #5c4200;
+  /* Tertiary */
+  --tertiary: #000000;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #1c1b1b;
+  --on-tertiary-container: #858383;
+  --tertiary-fixed: #e5e2e1;
+  --tertiary-fixed-dim: #c8c6c5;
+  --on-tertiary-fixed: #1c1b1b;
+  --on-tertiary-fixed-variant: #474746;
+  /* Surface text */
+  --on-surface: #1c1c18;
+  --on-surface-variant: #44474c;
+  --inverse-surface: #31302d;
+  --inverse-on-surface: #f4f0ea;
+  /* Outline */
+  --outline: #75777d;
+  --outline-variant: #c5c6cd;
+  /* Error */
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  /* Aliases for existing code */
   --midnight: #0e1a2b;
   --midnight-muted: #3c475a;
   --brass: #c8a45c;
   --brass-deep: #775a19;
   --outline-soft: #c5c6cd;
-  --outline-variant: #c5c6cd;
   --charcoal: #44474c;
-  --on-surface-variant: #44474c;
 }
 
 @theme inline {
+  /* Colors — existing aliases */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-container-lowest: var(--surface-container-lowest);
   --color-surface-container-low: var(--surface-container-low);
   --color-surface-container: var(--surface-container);
   --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
   --color-surface-variant: var(--surface-variant);
+  --color-surface-tint: var(--surface-tint);
   --color-midnight: var(--midnight);
   --color-midnight-muted: var(--midnight-muted);
   --color-brass: var(--brass);
   --color-brass-deep: var(--brass-deep);
   --color-outline-soft: var(--outline-soft);
-  --color-outline-variant: var(--outline-variant);
   --color-charcoal: var(--charcoal);
+  /* Colors — Stitch tokens */
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
+  --color-on-surface: var(--on-surface);
   --color-on-surface-variant: var(--on-surface-variant);
-  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+
+  /* Fonts */
   --font-sans: var(--font-hanken);
   --font-serif: var(--font-playfair);
+  /* Stitch font family tokens */
+  --font-body-md: var(--font-hanken);
+  --font-body-lg: var(--font-hanken);
+  --font-label-caps: var(--font-hanken);
+  --font-display-lg: var(--font-playfair);
+  --font-display-lg-mobile: var(--font-playfair);
+  --font-headline-md: var(--font-playfair);
+  --font-headline-sm: var(--font-playfair);
+  --font-quote: var(--font-playfair);
+
+  /* Stitch font-size tokens */
+  --text-display-lg: 64px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg-mobile: 40px;
+  --text-display-lg-mobile--line-height: 1.2;
+  --text-display-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 1.3;
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 1.4;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 1;
+  --text-label-caps--letter-spacing: 0.15em;
+  --text-quote: 28px;
+  --text-quote--line-height: 1.4;
+
+  /* Stitch spacing tokens */
+  --spacing-section-gap: 120px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 24px;
+  --spacing-gutter: 32px;
+  --spacing-container-max: 1280px;
+  --spacing-unit: 8px;
 }
 
 * {

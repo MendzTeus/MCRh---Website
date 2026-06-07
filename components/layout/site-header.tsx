@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { mainNav, siteConfig } from "@/content/site";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,42 +13,36 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "border-b border-outline-soft/30 bg-background/95 backdrop-blur-xl shadow-sm"
-          : "bg-transparent backdrop-blur-sm"
+    <nav
+      id="main-nav"
+      className={`fixed top-0 w-full z-50 backdrop-blur-xl transition-all duration-300 ${
+        scrolled ? "bg-background/95 shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between px-6 py-5 md:px-16">
-        <Link
-          href="/"
-          className="font-serif text-2xl font-normal tracking-tight text-midnight"
-        >
-          {siteConfig.name}
-        </Link>
-
-        <nav className="hidden items-center gap-8 md:flex">
-          {mainNav
-            .filter((item) => item.label !== "Home")
-            .map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-xs font-semibold tracking-[0.15em] text-charcoal uppercase transition-colors hover:text-brass-deep"
-              >
-                {item.label}
-              </Link>
-            ))}
-        </nav>
-
-        <Link
-          href="/contacto"
-          className="inline-flex items-center justify-center border border-midnight px-6 py-3 text-xs font-semibold tracking-[0.15em] text-midnight uppercase transition-colors hover:bg-surface-container"
-        >
-          Enquire
-        </Link>
+      <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 w-full max-w-container-max mx-auto">
+        {/* Left links */}
+        <div className="hidden md:flex space-x-8 items-center flex-1">
+          <Link className="font-label-caps text-label-caps text-primary border-b border-primary pb-1 transition-colors duration-300" href="/">Home</Link>
+          <Link className="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/propriedades">Book Now</Link>
+          <Link className="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/servicos/design">Design Services</Link>
+        </div>
+        {/* Logo center */}
+        <div className="flex-shrink-0 text-center flex-1 md:flex-none">
+          <Link className="text-headline-md font-headline-md tracking-tighter text-primary" href="/">MCRh</Link>
+        </div>
+        {/* Right links */}
+        <div className="hidden md:flex space-x-8 items-center justify-end flex-1">
+          <Link className="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/sobre">About Us</Link>
+          <Link className="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/contacto">Contact Us</Link>
+          <Link className="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/servicos/gestao">Management Services</Link>
+        </div>
+        {/* Mobile */}
+        <div className="md:hidden flex items-center">
+          <button className="text-primary">
+            <span className="text-2xl">☰</span>
+          </button>
+        </div>
       </div>
-    </header>
+    </nav>
   );
 }

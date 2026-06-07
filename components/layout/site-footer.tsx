@@ -1,45 +1,26 @@
 import Link from "next/link";
-import { Container } from "@/components/layout/container";
-import { mainNav, siteConfig } from "@/content/site";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-midnight text-white">
-      <Container className="grid gap-10 py-14 md:grid-cols-[1fr_auto]">
-        <div className="max-w-md">
-          <p className="font-serif text-3xl font-normal">{siteConfig.name}</p>
-          <div className="mt-5 h-px w-16 bg-brass" />
-          <p className="mt-5 text-sm leading-6 text-white/70">
-            {siteConfig.description}
+    <footer className="bg-primary-container text-on-primary-container w-full border-t border-outline-variant py-section-gap">
+      <div className="flex flex-col md:flex-row justify-between items-start px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto gap-12 md:gap-0">
+        <div className="flex-1">
+          <Link className="text-headline-sm font-headline-sm text-on-primary block mb-6" href="/">MCRh</Link>
+          <p className="font-body-md text-body-md max-w-xs opacity-80">
+            Curating exceptional stays in Manchester&apos;s most sought-after locations.
           </p>
-          <p className="mt-4 text-sm text-white/55">{siteConfig.address}</p>
         </div>
-        <div>
-          <p className="text-xs font-semibold tracking-[0.15em] text-brass uppercase">
-            Explore
-          </p>
-          <nav
-            aria-label="Footer navigation"
-            className="mt-5 grid grid-cols-2 gap-x-10 gap-y-3"
-          >
-            {mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-white/70 transition-colors hover:text-white"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+        <div className="flex-1 flex flex-col space-y-4">
+          <Link className="font-body-md text-body-md text-on-primary hover:text-secondary-fixed-dim transition-colors duration-300" href="/propriedades">Properties</Link>
+          <Link className="font-body-md text-body-md text-on-primary-container hover:text-secondary-fixed-dim transition-colors duration-300" href="/servicos/gestao">Management</Link>
+          <Link className="font-body-md text-body-md text-on-primary-container hover:text-secondary-fixed-dim transition-colors duration-300" href="/servicos/design">Design</Link>
+          <Link className="font-body-md text-body-md text-on-primary-container hover:text-secondary-fixed-dim transition-colors duration-300" href="/sobre">About</Link>
+          <Link className="font-body-md text-body-md text-on-primary-container hover:text-secondary-fixed-dim transition-colors duration-300" href="/contacto">Contact</Link>
         </div>
-      </Container>
-      <Container className="border-t border-white/10 py-5 text-xs text-white/45">
-        <p>
-          &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
-          reserved.
-        </p>
-      </Container>
+        <div className="flex-1 flex justify-start md:justify-end">
+          <p className="font-body-md text-body-md opacity-60">© {new Date().getFullYear()} MCRh. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
   );
 }
