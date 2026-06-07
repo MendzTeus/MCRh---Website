@@ -35,6 +35,9 @@ yarn-error.log*
 .env*.local
 !.env.example
 
+# local private integration config
+/config/ical-feeds.json
+
 # vercel
 .vercel
 

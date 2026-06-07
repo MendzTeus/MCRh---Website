@@ -287,12 +287,14 @@ for (const property of properties) {
     },
   });
 
-  await prisma.blockedDate.createMany({
-    data: sampleBlockedDates(property.slug).map((blockedDate) => ({
-      propertyId: saved.id,
-      ...blockedDate,
-    })),
-  });
+  if (process.env.CREATE_SAMPLE_BLOCKED_DATES === "true") {
+    await prisma.blockedDate.createMany({
+      data: sampleBlockedDates(property.slug).map((blockedDate) => ({
+        propertyId: saved.id,
+        ...blockedDate,
+      })),
+    });
+  }
 }
 
 const count = await prisma.property.count();
