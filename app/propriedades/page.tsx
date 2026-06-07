@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { ButtonLink } from "@/components/ui/button";
-import { PropertyCard } from "@/components/ui/property-card";
-import { Section } from "@/components/ui/section";
-import { SectionHeading } from "@/components/ui/section-heading";
+import Image from "next/image";
+import Link from "next/link";
 import { properties } from "@/content/properties";
 
 export const metadata: Metadata = {
@@ -13,81 +11,132 @@ export const metadata: Metadata = {
 
 export default function PropertiesPage() {
   return (
-    <>
-      <Section className="bg-midnight text-white">
-        <div className="grid min-h-[500px] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold tracking-[0.15em] text-brass uppercase">
-              Manchester collection
-            </p>
-            <h1 className="mt-5 font-serif text-5xl leading-tight font-normal sm:text-7xl">
-              City stays selected for comfort, location and character.
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-              Browse the current MCRh apartment collection. Each property page
-              will connect to live availability and direct enquiries as the
-              booking workflow comes online.
-            </p>
-          </div>
-          <div className="rounded-lg border border-white/10 bg-white/5 p-6">
-            <div className="relative aspect-[4/3] overflow-hidden rounded bg-surface-container text-midnight">
-              <div className="absolute inset-0 opacity-70 [background-image:linear-gradient(90deg,rgba(14,26,43,.08)_1px,transparent_1px),linear-gradient(rgba(14,26,43,.08)_1px,transparent_1px)] [background-size:48px_48px]" />
-              {properties.map((property, index) => (
-                <div
-                  key={property.slug}
-                  className="absolute flex h-10 w-10 items-center justify-center rounded-full border border-brass bg-midnight text-xs font-semibold text-white"
-                  style={{
-                    left: `${18 + ((index * 13) % 62)}%`,
-                    top: `${20 + ((index * 19) % 58)}%`,
-                  }}
-                  aria-label={property.name}
-                >
-                  {index + 1}
-                </div>
-              ))}
-              <div className="absolute bottom-5 left-5 right-5 rounded border border-outline-soft bg-surface/90 p-4 backdrop-blur-md">
-                <p className="text-xs font-semibold tracking-[0.15em] text-brass-deep uppercase">
-                  Map preview
-                </p>
-                <p className="mt-2 text-sm text-charcoal">
-                  Location context placeholder. Real map data comes when
-                  property coordinates are confirmed.
-                </p>
-              </div>
-            </div>
-          </div>
+    <main className="pt-32">
+      {/* Editorial header */}
+      <section className="mx-auto max-w-[1280px] px-6 pb-[120px] md:px-16">
+        <div className="mb-16 max-w-3xl">
+          <h1 className="font-serif text-[40px] font-normal leading-[1.2] tracking-[-0.01em] text-midnight md:text-[64px] md:leading-[1.1] md:tracking-[-0.02em]">
+            Curated Manchester stays
+          </h1>
+          <p className="mt-6 font-serif text-[28px] font-normal leading-[1.4] text-charcoal">
+            A handpicked selection of premium short-let apartments in the heart
+            of Manchester.
+          </p>
         </div>
-      </Section>
 
-      <Section>
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading
-            eyebrow="Available homes"
-            title={`${properties.length} Manchester property groups`}
-            body="Grouped from the existing MCRh content so the public site can become dynamic without duplicating each apartment page by hand."
-          />
-          <ButtonLink href="/contacto" variant="ghost">
-            Ask about availability
-          </ButtonLink>
+        {/* Filter chips — visual only */}
+        <div className="mb-16 flex flex-wrap items-center gap-4">
+          {["Area", "Guests", "Bedrooms", "Availability"].map((filter) => (
+            <div
+              key={filter}
+              className="flex cursor-pointer items-center gap-2 rounded-full border border-outline-soft px-4 py-2 transition-colors hover:bg-surface-variant"
+            >
+              <span className="text-xs font-semibold tracking-[0.15em] text-midnight uppercase">
+                {filter}
+              </span>
+            </div>
+          ))}
+          <div className="ml-auto text-sm text-charcoal">
+            {properties.length} Properties
+          </div>
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {properties.map((property) => (
-            <PropertyCard
+
+        {/* Staggered 2-column grid */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {properties.map((property, i) => (
+            <article
               key={property.slug}
-              name={property.name}
-              area={property.area}
-              href={`/propriedades/${property.slug}`}
-              imageSrc={property.imageSrc}
-              imageAlt={property.imageAlt}
-              specs={[
-                `${property.maxGuests} guests`,
-                `${property.bedrooms} beds`,
-                `${property.bathrooms} baths`,
-              ]}
-            />
+              className={`group flex flex-col gap-4${i % 2 === 1 ? " md:mt-16" : ""}`}
+            >
+              <Link
+                href={`/propriedades/${property.slug}`}
+                className="relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-variant"
+              >
+                <Image
+                  src={property.imageSrc}
+                  alt={property.imageAlt}
+                  fill
+                  sizes="(max-width:768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute left-4 top-4 flex gap-2">
+                  <span className="rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold tracking-wider uppercase backdrop-blur">
+                    Available
+                  </span>
+                </div>
+              </Link>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start justify-between">
+                  <h2 className="font-serif text-[24px] font-normal leading-[1.4] text-midnight">
+                    {property.name}
+                  </h2>
+                  <span className="text-sm text-charcoal">{property.area}</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded border border-outline-soft px-2 py-1 text-xs text-charcoal">
+                    {property.bedrooms} Bed
+                  </span>
+                  <span className="rounded border border-outline-soft px-2 py-1 text-xs text-charcoal">
+                    {property.maxGuests} guests
+                  </span>
+                  <span className="rounded border border-outline-soft px-2 py-1 text-xs text-charcoal">
+                    {property.bathrooms} bath
+                  </span>
+                </div>
+                <Link
+                  href={`/propriedades/${property.slug}`}
+                  className="mt-2 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] text-midnight uppercase transition-colors hover:text-brass-deep"
+                >
+                  View Details →
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
-      </Section>
-    </>
+
+        {/* Map section */}
+        <section className="mt-[120px] border-t border-outline-soft pt-[120px]">
+          <div className="mb-12 max-w-3xl">
+            <h2 className="mb-6 font-serif text-[40px] font-normal leading-[1.2] tracking-[-0.01em] text-midnight md:text-[64px] md:leading-[1.1] md:tracking-[-0.02em]">
+              Explore stays across Manchester
+            </h2>
+            <p className="font-serif text-[28px] font-normal leading-[1.4] text-charcoal">
+              Discover our collection across Manchester&apos;s most iconic
+              neighbourhoods.
+            </p>
+          </div>
+          <div className="relative aspect-[21/9] w-full cursor-crosshair overflow-hidden rounded-lg border border-outline-soft bg-background">
+            <div
+              className="absolute inset-0 opacity-10"
+              style={{
+                backgroundImage:
+                  "radial-gradient(#0e1a2b 0.5px, transparent 0.5px)",
+                backgroundSize: "24px 24px",
+              }}
+            />
+            {properties.map((property, i) => (
+              <div
+                key={property.slug}
+                className="group/marker absolute"
+                style={{
+                  left: `${20 + ((i * 13) % 60)}%`,
+                  top: `${20 + ((i * 19) % 55)}%`,
+                }}
+              >
+                <div className="h-4 w-4 animate-pulse rounded-full bg-brass shadow-lg" />
+                <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-midnight px-3 py-1 text-[10px] font-semibold tracking-wider text-white opacity-0 transition-opacity group-hover/marker:opacity-100">
+                  {property.area}
+                </div>
+              </div>
+            ))}
+            <div className="absolute bottom-6 right-6 rounded border border-outline-soft bg-background/90 px-4 py-2 backdrop-blur">
+              <span className="text-[10px] font-semibold tracking-[0.15em] text-charcoal uppercase">
+                Interactive Map View
+              </span>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
   );
 }
