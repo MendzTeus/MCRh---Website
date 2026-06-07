@@ -5,13 +5,16 @@ import { Card } from "@/components/ui/card";
 import { PropertyCard } from "@/components/ui/property-card";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { featuredProperties, siteConfig } from "@/content/site";
+import { getFeaturedProperties } from "@/content/properties";
+import { siteConfig } from "@/content/site";
 
 const stats = [
   { label: "Manchester stays", value: "Curated" },
   { label: "Guest support", value: "24/7" },
   { label: "Owner services", value: "Full" },
 ];
+
+const featuredProperties = getFeaturedProperties();
 
 export default function Home() {
   return (
@@ -117,7 +120,19 @@ export default function Home() {
         </div>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {featuredProperties.map((property) => (
-            <PropertyCard key={property.href} {...property} />
+            <PropertyCard
+              key={property.slug}
+              name={property.name}
+              area={property.area}
+              href={`/propriedades/${property.slug}`}
+              imageSrc={property.imageSrc}
+              imageAlt={property.imageAlt}
+              specs={[
+                `${property.maxGuests} guests`,
+                `${property.bedrooms} beds`,
+                `${property.bathrooms} baths`,
+              ]}
+            />
           ))}
         </div>
       </Section>

@@ -11,6 +11,7 @@
     "lint": "eslint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "DATABASE_URL=${DIRECT_URL:-$DATABASE_URL} prisma migrate dev",
+    "prisma:seed": "node prisma/seed.mjs",
     "prisma:studio": "prisma studio"
   },
   "dependencies": {
