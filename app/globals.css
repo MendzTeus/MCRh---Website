@@ -4,6 +4,7 @@
   --background: #fdf9f3;
   --foreground: #1c1c18;
   --surface: #fdf9f3;
+  --surface-container-lowest: #ffffff;
   --surface-container-low: #f7f3ed;
   --surface-container: #f1ede7;
   --surface-container-high: #ebe8e2;
@@ -13,7 +14,9 @@
   --brass: #c8a45c;
   --brass-deep: #775a19;
   --outline-soft: #c5c6cd;
+  --outline-variant: #c5c6cd;
   --charcoal: #44474c;
+  --on-surface-variant: #44474c;
 }
 
 @theme inline {
@@ -29,7 +32,10 @@
   --color-brass: var(--brass);
   --color-brass-deep: var(--brass-deep);
   --color-outline-soft: var(--outline-soft);
+  --color-outline-variant: var(--outline-variant);
   --color-charcoal: var(--charcoal);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-surface-container-lowest: var(--surface-container-lowest);
   --font-sans: var(--font-hanken);
   --font-serif: var(--font-playfair);
 }
