@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { AvailabilityCalendar } from "@/components/properties/availability-calendar";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/ui/section";
@@ -156,6 +157,20 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
               </Card>
             ))}
           </div>
+        </div>
+      </Section>
+
+      <Section className="bg-surface-container">
+        <div className="grid gap-10 lg:grid-cols-[0.7fr_1fr] lg:items-start">
+          <SectionHeading
+            eyebrow="Availability"
+            title="Check the calendar before sending your enquiry."
+            body="Blocked dates are read from the database now. The external iCal feed sync can plug into the same model when the WSC Calendar Sync details are available."
+          />
+          <AvailabilityCalendar
+            propertySlug={property.slug}
+            propertyName={property.name}
+          />
         </div>
       </Section>
 

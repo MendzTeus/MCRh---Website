@@ -208,6 +208,45 @@ const mediaPaths = {
   ],
 };
 
+function utcDate(year, month, day) {
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+function addMonths(date, months) {
+  return new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + months, 1),
+  );
+}
+
+function sampleBlockedDates(slug) {
+  const currentMonth = new Date();
+  const nextMonth = addMonths(currentMonth, 1);
+  const months = [currentMonth, nextMonth];
+  const source = "seed:wsc-calendar-sync-placeholder";
+  const syncedAt = new Date();
+
+  return months.flatMap((month, monthIndex) => {
+    const year = month.getUTCFullYear();
+    const monthNumber = month.getUTCMonth() + 1;
+    const offset = (slug.length + monthIndex * 3) % 5;
+
+    return [
+      {
+        start: utcDate(year, monthNumber, 8 + offset),
+        end: utcDate(year, monthNumber, 11 + offset),
+        source,
+        syncedAt,
+      },
+      {
+        start: utcDate(year, monthNumber, 20 + offset),
+        end: utcDate(year, monthNumber, 23 + offset),
+        source,
+        syncedAt,
+      },
+    ];
+  });
+}
+
 for (const property of properties) {
   const saved = await prisma.property.upsert({
     where: { slug: property.slug },
@@ -240,6 +279,20 @@ for (const property of properties) {
       })),
     });
   }
+
+  await prisma.blockedDate.deleteMany({
+    where: {
+      propertyId: saved.id,
+      source: "seed:wsc-calendar-sync-placeholder",
+    },
+  });
+
+  await prisma.blockedDate.createMany({
+    data: sampleBlockedDates(property.slug).map((blockedDate) => ({
+      propertyId: saved.id,
+      ...blockedDate,
+    })),
+  });
 }
 
 const count = await prisma.property.count();
