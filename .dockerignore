@@ -1,0 +1,7 @@
+.env
+.env*.local
+.git
+.next
+config/ical-feeds.json
+node_modules
+tsconfig.tsbuildinfo

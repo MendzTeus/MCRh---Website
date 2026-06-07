@@ -12,6 +12,13 @@ pnpm prisma:seed
 pnpm ical:sync
 ```
 
+## Production Preview
+
+`https://www.airbnbflow.com/` is used as the temporary production preview
+domain while the official MCRh domain is not yet on Cloudflare.
+
+The app image is built locally and served by Docker Swarm behind Traefik.
+
 ## Private iCal Feeds
 
 Calendar feed URLs are private and must not be committed. Put them in:
