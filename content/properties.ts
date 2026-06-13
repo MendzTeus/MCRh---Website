@@ -1,7 +1,10 @@
 export type PropertyUnit = {
+  slug?: string;
   title: string;
   specs: string;
   description: string;
+  label?: string;
+  squareFeet?: string;
 };
 
 export type PropertyImage = {
@@ -79,7 +82,7 @@ function galleryFor(name: string, paths: readonly string[]): PropertyImage[] {
 export const properties: Property[] = [
   {
     slug: "chambers",
-    name: "Chapel Walks Chambers",
+    name: "Chambers Residence",
     area: "City Centre",
     headline: "Character apartments in the centre of Manchester.",
     description:
@@ -102,22 +105,94 @@ export const properties: Property[] = [
     ],
     units: [
       {
-        title: "Penthouse 3 Bedrooms 2 Bath",
-        specs: "3 bedrooms / 2 bathrooms",
+        slug: "chambers-apt-01",
+        title: "Chambers Apt. 01",
+        label: "Penthouse Suite",
+        specs: "2 bedrooms / 2 bathrooms",
+        squareFeet: "1,450 sq ft",
         description:
-          "This apartment has a wall mounted Smart TV and a fully equipped kitchen with dishwasher, microwave, washing machine, fridge and oven. The property has lift access and can provide towels and bed linen.",
+          "An elevated sanctuary blending quiet luxury with panoramic urban vistas, designed for the discerning few.",
       },
       {
-        title: "Deluxe 5 Stars Bliss - Large 2 Bedrooms With Balcony",
-        specs: "2 bedrooms / balcony",
-        description:
-          "Large two-bedroom apartment with flat-screen TV, satellite channels and a fully equipped kitchen with dishwasher, washing machine, fridge and oven.",
-      },
-      {
-        title: "Stylish one Bedroom one Bath",
+        slug: "chambers-apt-02",
+        title: "Chambers Apt. 02",
+        label: "Executive Studio",
         specs: "1 bedroom / 1 bathroom",
+        squareFeet: "720 sq ft",
         description:
-          "High ceilings, big windows and skylights flood the living room with natural light, creating a quiet home away from home in the busy city centre.",
+          "A composed city studio with refined finishes, soft textures and a fully equipped kitchen for considered short stays.",
+      },
+      {
+        slug: "chambers-apt-04",
+        title: "Chambers Apt. 04",
+        label: "Garden Terrace",
+        specs: "2 bedrooms / terrace",
+        squareFeet: "1,120 sq ft",
+        description:
+          "A calm residence with generous living space and a private terrace feel in the heart of Manchester.",
+      },
+      {
+        slug: "chambers-apt-05",
+        title: "Chambers Apt. 05",
+        label: "Skyline View",
+        specs: "2 bedrooms / 2 bathrooms",
+        squareFeet: "1,180 sq ft",
+        description:
+          "A light-filled apartment with city outlooks, tactile furnishings and all the practical details required for longer stays.",
+      },
+      {
+        slug: "chambers-apt-08",
+        title: "Chambers Apt. 08",
+        label: "Boutique Studio",
+        specs: "1 bedroom / 1 bathroom",
+        squareFeet: "690 sq ft",
+        description:
+          "A compact boutique apartment shaped around comfort, calm materials and an efficient city-centre footprint.",
+      },
+      {
+        slug: "chambers-apt-10",
+        title: "Chambers Apt. 10",
+        label: "Grand Penthouse",
+        specs: "3 bedrooms / 2 bathrooms",
+        squareFeet: "1,680 sq ft",
+        description:
+          "A grand upper-floor residence with generous proportions, refined detailing and a strong sense of privacy.",
+      },
+      {
+        slug: "chambers-apt-11",
+        title: "Chambers Apt. 11",
+        label: "Urban Loft",
+        specs: "2 bedrooms / 1 bathroom",
+        squareFeet: "980 sq ft",
+        description:
+          "A loft-inspired stay with character, smart amenities and an atmosphere of understated Manchester luxury.",
+      },
+      {
+        slug: "chambers-apt-12",
+        title: "Chambers Apt. 12",
+        label: "City View Studio",
+        specs: "1 bedroom / 1 bathroom",
+        squareFeet: "700 sq ft",
+        description:
+          "A serene studio with city views, crafted for effortless arrivals and restful nights between appointments or weekends away.",
+      },
+      {
+        slug: "chambers-apt-14",
+        title: "Chambers Apt. 14",
+        label: "Terrace Suite",
+        specs: "2 bedrooms / terrace",
+        squareFeet: "1,240 sq ft",
+        description:
+          "A suite-style apartment balancing indoor comfort with an airy terrace character and polished hospitality details.",
+      },
+      {
+        slug: "chambers-apt-15",
+        title: "Chambers Apt. 15",
+        label: "Corner Residence",
+        specs: "2 bedrooms / 2 bathrooms",
+        squareFeet: "1,260 sq ft",
+        description:
+          "A corner residence with layered textures, generous daylight and a refined setting for city-centre living.",
       },
     ],
     displayOrder: 1,
@@ -204,8 +279,11 @@ export const properties: Property[] = [
     ],
     units: [
       {
-        title: "Stylish two Bedrooms two Bath",
+        slug: "wood-street-apt-01",
+        title: "Wood Street Apt. 01",
+        label: "Two Bedroom Residence",
         specs: "2 bedrooms / 2 bathrooms",
+        squareFeet: "1,050 sq ft",
         description:
           "This apartment has two bedrooms, a wall mounted Smart TV and a fully equipped kitchen with dishwasher, microwave, washing machine, fridge and oven. It is on the first floor with lift access, and towels and bed linen can be provided.",
       },
